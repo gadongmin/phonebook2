@@ -1,24 +1,31 @@
 package com.javaex.vo;
 
 public class PersonVO {
+
 	// 필드
 	private int personId;
 	private String name;
 	private String hp;
-	private String campany;
+	private String company;
 
 	// 생성자
 	public PersonVO() {
 	}
 
-	public PersonVO(int personId, String name, String hp, String campany) {
+	public PersonVO(String name, String hp, String company) {
+		this.name = name;
+		this.hp = hp;
+		this.company = company;
+	}
+
+	public PersonVO(int personId, String name, String hp, String company) {
 		this.personId = personId;
 		this.name = name;
 		this.hp = hp;
-		this.campany = campany;
+		this.company = company;
 	}
 
-	// 메소드 gs
+	// 메소드gs
 	public int getPersonId() {
 		return personId;
 	}
@@ -43,17 +50,17 @@ public class PersonVO {
 		this.hp = hp;
 	}
 
-	public String getCampany() {
-		return campany;
+	public String getCompany() {
+		return company;
 	}
 
-	public void setCampany(String campany) {
-		this.campany = campany;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
-	// 메소드 일반
+	// 메소드일반
 	@Override
 	public String toString() {
-		return "PersonVo [personId=" + personId + ", name=" + name + ", hp=" + hp + ", campany=" + campany + "]";
+		return "PersonVO [personId=" + personId + ", name=" + name + ", hp=" + hp + ", company=" + company + "]";
 	}
 }

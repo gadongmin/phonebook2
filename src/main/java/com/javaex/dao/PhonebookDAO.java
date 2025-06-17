@@ -11,6 +11,7 @@ import java.util.List;
 import com.javaex.vo.PersonVO;
 
 public class PhonebookDAO {
+
 	// 필드
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -22,7 +23,8 @@ public class PhonebookDAO {
 	private String pw = "phonebook";
 
 	// 생성자
-	public PhonebookDAO() {}
+	public PhonebookDAO() {
+	}
 
 	// 메소드gs
 
@@ -75,10 +77,10 @@ public class PhonebookDAO {
 			// 3. SQL문준비 / 바인딩 / 실행
 			// SQL문준비
 			String query = "";
-			query += " select  	person_id, ";
-			query += "		  	name, ";
-			query += "         	hp, ";
-			query += "         	company ";
+			query += " select  	person_id ";
+			query += "		  	,name ";
+			query += "         	,hp ";
+			query += "         	,company ";
 			query += " from 	person ";
 			query += " order by person_id desc ";
 
@@ -110,5 +112,75 @@ public class PhonebookDAO {
 		this.close();
 
 		return personList;
+
+	}
+
+	// 사람(주소) 등록
+	public int personInsert(PersonVO personVO) {
+		System.out.println("personInsert()");
+		int count = -1;
+
+		this.connect();
+
+		try {
+			// 3. SQL문준비 / 바인딩 / 실행
+			// - SQL문준비
+			String query = "";
+			query += " insert into person ";
+			query += " values(null, ?, ?, ?) ";
+
+			// - 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, personVO.getName());
+			pstmt.setString(2, personVO.getHp());
+			pstmt.setString(3, personVO.getCompany());
+
+			// - 실행
+			count = pstmt.executeUpdate();
+
+			// 4. 결과처리
+			System.out.println(count + "건이 저장되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+
+		return count;
+	}
+
+	// 사람(주소) 삭제
+	public int personDelete(int no) {
+		System.out.println("personDelete");
+
+		int count = -1;
+
+		this.connect();
+
+		try {
+			// 3. SQL문준비 / 바인딩 / 실행
+			// - SQL문준비
+			String query = "";
+			query += " delete from person ";
+			query += " where person_id = ? ";
+
+			// - 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+
+			// - 실행
+			count = pstmt.executeUpdate();
+
+			// 4. 결과처리
+			System.out.println(count + "건 삭제되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+
+		return count;
 	}
 }
