@@ -183,4 +183,43 @@ public class PhonebookDAO {
 
 		return count;
 	}
+	
+	// 사람(주소) 수정
+	public int personUpdate(PersonVO personVO) {
+		System.out.println("personUpdate()");
+		int count = -1;
+
+		this.connect();
+
+		try {
+			// 3. SQL문준비 / 바인딩 / 실행
+			// - SQL문준비
+			String query = "";
+			query += " update 	person ";
+			query += " set 		name = ? ";
+			query += " 			,hp = ? ";
+			query += " 			,company = ? ";
+			query += " where 	person_id = ? ";
+
+			// - 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, personVO.getName());
+			pstmt.setString(2, personVO.getHp());
+			pstmt.setString(3, personVO.getCompany());
+			pstmt.setInt(4, personVO.getPersonId());
+
+			// - 실행
+			count = pstmt.executeUpdate();
+
+			// 4. 결과처리
+			System.out.println(count + "건이 수정되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+
+		return count;
+	}
 }

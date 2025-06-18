@@ -39,7 +39,11 @@
 						<td><%= personList.get(i).getCompany() %></td>
 					<tr>	
 					<tr>
-						<td>[수정폼으로 이동]</td>
+						<td>
+							<a href="http://localhost:8080/phonebook2/pbc?action=mform">
+							[수정폼으로 이동]
+							</a>
+						</td>
 						<td>
 							<a href="http://localhost:8080/phonebook2/pbc?action=delete&no=<%= personList.get(i).getPersonId() %>">
 								[삭제] <%= personList.get(i).getPersonId() %>
@@ -53,8 +57,9 @@
 		<%	  
 		  }	
 		%>
-		
-		<a href="http://localhost:8080/phonebook2/pbc?action=wform">등록폼 이동</a>
 	
+		[주소록 작성폼 이동] : 주소창에 aaa.html 입력하시고 엔터입력
+		<br>
+		<a href = "http://localhost:8080/phonebook2/pbc?action=wform"> 주소록 작성폼 이동 </a>
 	</body>
 </html>

@@ -9,8 +9,8 @@
 	<body>
 		<h1>주소록</h1>
 	
-		<h2>전화번호 등록폼</h2>
-		<p>전화번호를 등록하는 폼 입니다.</p>
+		<h2>전화번호 수정폼</h2>
+		<p>전화번호를 수정하는 폼 입니다.</p>
 	
 		<form action="http://localhost:8080/phonebook2/pbc"  method="get">
 			<label>이름(name)</label>
@@ -24,11 +24,15 @@
 			<label>회사(company)</label>
 			<input type="text" name="company" value="">
 			<br>
+						
+			<label>아이디(person_id)</label>
+			<input type="text" name="person_id" value="">
+			<br>
 			
 			<label>액션: </label>
-			<input type = "hidden" name = "action"  value = "write">
+			<input type = "hidden" name = "action"  value = "modify">
 			
-			<button>등록</button>
+			<button>수정</button>
 		</form>
 	
 	</body>

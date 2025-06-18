@@ -106,11 +106,41 @@ public class PhonebookController extends HttpServlet {
 			PhonebookDAO phonebookDAO= new PhonebookDAO();
 			phonebookDAO.personDelete(no);
 			
-			//리다이렉트 action=list
-			//response.sendRedirect("http://localhost:8080/phonebook2/pbc?action=list");
+			// 리다이렉트 action=list
+			response.sendRedirect("http://localhost:8080/phonebook2/pbc?action=list");
+			
+		}else if("mform".equals(action)) { //수정폼업무
+			System.out.println("수정폼");
+	
+			//수정폼을 응답해야한다
+			//1)DB관련 할일이 없다 - 안하면된다
+			
+			//2)jsp에게 화면을 그리게 한다(포워드)
+			//modifyForm.jsp 포워드한다
+			RequestDispatcher rd = request.getRequestDispatcher("/modifyForm.jsp");
+			rd.forward(request, response);
+			
+		}else if("modify".equals(action) ) { //수정업무
+			System.out.println("수정");
+			
+			//파라미터4개 꺼내기
+			String name = request.getParameter("name");
+			String hp =  request.getParameter("hp");
+			String company = request.getParameter("company");
+			int personId = Integer.parseInt(request.getParameter("person_id"));
+			
+			//데이터를 묶는다
+			PersonVO personVO = new PersonVO(name, hp, company, personId);
+			System.out.println(personVO);
+			
+			//DAO를 통해서 저장시키기
+			PhonebookDAO phonebookDAO= new PhonebookDAO();
+			phonebookDAO.personUpdate(personVO);
+			
+			//리다이렉트
+			response.sendRedirect("http://localhost:8080/phonebook2/pbc?action=list");
 			
 		}
-		
 		
 	}
 
